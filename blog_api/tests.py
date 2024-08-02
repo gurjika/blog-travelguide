@@ -11,7 +11,7 @@ class BlogViewSetTests(APITestCase):
     def setUp(self):
         self.user = User.objects.create_user(username='testuser', password='testpassword')
         self.blog_post = BlogPost.objects.create(title='Test Blog', content='This is a test blog.', author=self.user.profile)
-        self.url = reverse('blog-list')  # Adjust according to your URL names
+        self.url = reverse('blog-list')
 
     def test_list_blogs(self):
         response = self.client.get(self.url)
@@ -47,7 +47,7 @@ class CommentViewSetTests(APITestCase):
 class ProfileViewTests(APITestCase):
 
     def setUp(self):
-        self.user = User.objects.create_user(username='testuser1', password='testpassword')
+        self.user = User.objects.create_user(username='testuser', password='testpassword')
         self.url = reverse('user-profile', kwargs={'username': self.user.username})
 
     def test_get_profile(self):
@@ -57,7 +57,8 @@ class ProfileViewTests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
     def test_update_profile(self):
-        self.client.login(username='testuser1', password='testpassword')
+
+        self.client.login(username='testuser', password='testpassword')
         self.client.force_authenticate(user=self.user)
 
         data = {'bio': 'Updated bio'}
