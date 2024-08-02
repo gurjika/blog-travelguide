@@ -16,6 +16,7 @@ python-dotenv = "*"
 djangorestframework-simplejwt = "*"
 djoser = "*"
 drf-nested-routers = "*"
+gunicorn = "*"
 
 [dev-packages]
 
