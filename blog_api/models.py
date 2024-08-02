@@ -11,6 +11,10 @@ class BlogPost(models.Model):
     title = models.CharField(max_length=255)
     content = models.TextField()
     author = models.ForeignKey(Profile, related_name='blogs', on_delete=models.CASCADE)
+
+
+    def __str__(self) -> str:
+        return self.title
     
 
 class Comment(models.Model):
