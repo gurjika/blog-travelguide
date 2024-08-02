@@ -13,6 +13,8 @@ pytest-django = "*"
 django-filter = "*"
 drf-yasg = "*"
 python-dotenv = "*"
+djangorestframework-simplejwt = "*"
+djoser = "*"
 
 [dev-packages]
 
