@@ -12,6 +12,7 @@ django-debug-toolbar = "*"
 pytest-django = "*"
 django-filter = "*"
 drf-yasg = "*"
+python-dotenv = "*"
 
 [dev-packages]
 
