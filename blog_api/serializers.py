@@ -31,8 +31,6 @@ class ProfileSerializer(serializers.ModelSerializer):
         model = Profile
 
 
-
-
 class SimpleProfileSerializer(serializers.ModelSerializer):
     user = SimpleUserSerializer(read_only=True)
     class Meta:
