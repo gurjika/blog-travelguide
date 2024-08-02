@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "53ff51a87c1ccfeb3f6dd8cfad6a6515fbd29bc14c208d03ba83004e230f1b21"
+            "sha256": "35ef770b09ea0e04e4b807a5926b9688b0d6a550e49e79e7f4bb50547dad49bd"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -255,12 +255,12 @@
         },
         "django-filter": {
             "hashes": [
-                "sha256:48e5fc1da3ccd6ca0d5f9bb550973518ce977a4edde9d2a8a154a7f4f0b9f96e",
-                "sha256:df2ee9857e18d38bed203c8745f62a803fa0f31688c9fe6f8e868120b1848e48"
+                "sha256:c4852822928ce17fb699bcfccd644b3574f1a2d80aeb2b4ff4f16b02dd49dc64",
+                "sha256:d8ccaf6732afd21ca0542f6733b11591030fa98669f8d15599b358e24a2cd9c3"
             ],
             "index": "pypi",
             "markers": "python_version >= '3.8'",
-            "version": "==24.2"
+            "version": "==24.3"
         },
         "django-templated-mail": {
             "hashes": [
@@ -295,6 +295,15 @@
             "index": "pypi",
             "markers": "python_version >= '3.8' and python_version < '4.0'",
             "version": "==2.2.3"
+        },
+        "drf-nested-routers": {
+            "hashes": [
+                "sha256:2b846385ed95c9f17bf4242db3b264ac826b5af00dda6c737d3fe7cc7bf2c7db",
+                "sha256:3a8ec45a025c0f39188ec1ec415244beb875a6f4db87911a1f5a606d09b68c9f"
+            ],
+            "index": "pypi",
+            "markers": "python_version >= '3.8'",
+            "version": "==0.94.1"
         },
         "drf-yasg": {
             "hashes": [

@@ -6,6 +6,6 @@ from .models import Profile
 
 
 @receiver(post_save, sender=settings.AUTH_USER_MODEL)
-def create_player_for_new_user(sender, instance, created, **kwargs):
+def create_profile_for_new_user(sender, instance, created, **kwargs):
     if created:
         Profile.objects.create(user=instance)

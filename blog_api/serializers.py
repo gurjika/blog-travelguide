@@ -12,13 +12,6 @@ class SimpleUserSerializer(serializers.ModelSerializer):
         model = User
 
 
-
-class CommentSerializer(serializers.ModelSerializer):
-    class Meta:
-        fields = ['content', 'author']
-        model = Comment
-
-
 class SimpleProfileSerializer(serializers.ModelSerializer):
     user = SimpleUserSerializer(read_only=True)
     class Meta:
@@ -26,6 +19,18 @@ class SimpleProfileSerializer(serializers.ModelSerializer):
         model = Profile
 
 
+class CommentSerializer(serializers.ModelSerializer):
+    author = SimpleProfileSerializer(read_only=True)
+    class Meta:
+        fields = ['content', 'author']
+        model = Comment
+
+
+    def create(self, validated_data):
+        obj = Comment.objects.create(author=self.context['user'].profile, blogpost_id=self.context['blogpost_id'], **validated_data)
+        return obj
+    
+    
 class BlogPostSerializer(serializers.ModelSerializer):
     author = SimpleProfileSerializer(read_only=True)
     blog_comments = CommentSerializer(many=True, read_only=True)

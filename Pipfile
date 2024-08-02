@@ -15,6 +15,7 @@ drf-yasg = "*"
 python-dotenv = "*"
 djangorestframework-simplejwt = "*"
 djoser = "*"
+drf-nested-routers = "*"
 
 [dev-packages]
 
