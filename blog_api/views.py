@@ -14,7 +14,7 @@ class BlogViewSet(ModelViewSet):
     serializer_class = BlogPostSerializer
 
     def get_serializer_context(self):
-        return {'user': self.request.user}
+        return {'user': self.request.user, 'request': self.request}
     
 class CommentViewSet(ModelViewSet):
     permission_classes = [IsAuthenticatedOrReadOnly]

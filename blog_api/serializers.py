@@ -26,16 +26,32 @@ class SimpleBlogSerializer(serializers.ModelSerializer):
 
 class ProfileSerializer(serializers.ModelSerializer):
     blogs = SimpleBlogSerializer(read_only=True, many=True)
+    profile_pic = serializers.SerializerMethodField()
+
     class Meta:
         fields = ['user', 'bio', 'profile_pic', 'blogs']
         model = Profile
 
+    def get_profile_pic(self, obj):
+        if obj.profile_pic:
+            request = self.context.get('request')
+            return request.build_absolute_uri(obj.profile_pic.url)
+        return None
+
 
 class SimpleProfileSerializer(serializers.ModelSerializer):
     user = SimpleUserSerializer(read_only=True)
+    profile_pic = serializers.SerializerMethodField()
+
     class Meta:
         fields = ['user_id', 'user', 'profile_pic']
         model = Profile
+
+    def get_profile_pic(self, obj):
+        if obj.profile_pic:
+            request = self.context.get('request')
+            return request.build_absolute_uri(obj.profile_pic.url)
+        return None
 
 
 class CommentSerializer(serializers.ModelSerializer):
