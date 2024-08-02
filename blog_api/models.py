@@ -4,7 +4,7 @@ from django.db import models
 
 class Profile(models.Model):
     user = models.OneToOneField('core.user', related_name='profile', on_delete=models.CASCADE)
-    bio = models.TextField()
+    bio = models.TextField(blank=True)
     profile_pic = models.ImageField(upload_to='profile_pics', null=True)
 
 class BlogPost(models.Model):
