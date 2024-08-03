@@ -70,7 +70,7 @@ jobs:
     needs: build
     if: github.ref == 'refs/heads/master' && github.event_name == 'push'
     steps: 
-    
+
       - name: deploy to digitalocean
         uses: appleboy/ssh-action@v1.0.3
         with:
@@ -81,7 +81,7 @@ jobs:
             script: |
               cd blog-travelguide
               echo "DJANGO_SECRET_KEY=${{ secrets.DJANGO_SECRET_KEY }}" > .env
-              echo "MYSQL_DB_PASSWORD=${{ secrets.DB_PASSWORD }}" >> .env
+              echo "MYSQL_DB_PASSWORD=${{ secrets.MYSQL_DB_PASSWORD }}" >> .env
 
               docker compose down
               git pull
