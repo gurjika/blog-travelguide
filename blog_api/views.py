@@ -27,7 +27,7 @@ class CommentViewSet(ModelViewSet):
     
 
 class ProfileView(RetrieveUpdateAPIView):
-    http_method_names = ['get', 'patch', 'head', 'options']
+    http_method_names = ['get', 'patch', 'head', 'options', 'put']
     serializer_class = ProfileSerializer
     permission_classes = [IsAuthenticated, IsCurrentUserOrReadOnly]
 
