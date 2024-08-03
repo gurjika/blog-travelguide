@@ -26,10 +26,12 @@ class SimpleBlogSerializer(serializers.ModelSerializer):
 
 class ProfileSerializer(serializers.ModelSerializer):
     blogs = SimpleBlogSerializer(read_only=True, many=True)
-    profile_pic = serializers.SerializerMethodField()
+    profile_pic = serializers.SerializerMethodField(read_only=True)
+    profile_pic_update = serializers.ImageField(write_only=True, required=False)
+    user = serializers.PrimaryKeyRelatedField(read_only=True)
 
     class Meta:
-        fields = ['user', 'bio', 'profile_pic', 'blogs']
+        fields = ['user', 'bio', 'profile_pic', 'blogs', 'profile_pic_update']
         model = Profile
 
     def get_profile_pic(self, obj):
@@ -38,6 +40,17 @@ class ProfileSerializer(serializers.ModelSerializer):
             return request.build_absolute_uri(obj.profile_pic.url)
         return None
 
+    def update(self, instance, validated_data):
+        profile_pic_update = validated_data.pop('profile_pic_update', None)
+        
+        for attr, value in validated_data.items():
+            setattr(instance, attr, value)
+        
+        if profile_pic_update:
+            instance.profile_pic = profile_pic_update
+        
+        instance.save()
+        return instance
 
 class SimpleProfileSerializer(serializers.ModelSerializer):
     user = SimpleUserSerializer(read_only=True)
