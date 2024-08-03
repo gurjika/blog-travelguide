@@ -69,10 +69,14 @@ class CommentSerializer(serializers.ModelSerializer):
 class BlogPostSerializer(serializers.ModelSerializer):
     author = SimpleProfileSerializer(read_only=True)
     blog_comments = CommentSerializer(many=True, read_only=True)
+    comment_count = serializers.SerializerMethodField()
     class Meta:
-        fields = ['title', 'content', 'author', 'blog_comments']
+        fields = ['title', 'content', 'author', 'blog_comments', 'comment_count']
         model = BlogPost
 
+
+    def get_comment_count(self, obj):
+        return obj.blog_comments.count()
 
     def create(self, validated_data):
         obj = BlogPost.objects.create(author=self.context['user'].profile, **validated_data)
