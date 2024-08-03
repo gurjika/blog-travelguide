@@ -12,7 +12,6 @@ class BlogPost(models.Model):
     content = models.TextField()
     author = models.ForeignKey(Profile, related_name='blogs', on_delete=models.CASCADE)
 
-
     def __str__(self) -> str:
         return self.title
     

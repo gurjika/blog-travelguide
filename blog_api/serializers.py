@@ -62,9 +62,14 @@ class CommentSerializer(serializers.ModelSerializer):
 
 
     def create(self, validated_data):
+
         obj = Comment.objects.create(author=self.context['user'].profile, blogpost_id=self.context['blogpost_id'], **validated_data)
         return obj
     
+    def validate(self, data):
+        if not data.get('content', '').strip():
+            raise serializers.ValidationError('Content cannot be empty.')
+        return data
 
 class BlogPostSerializer(serializers.ModelSerializer):
     author = SimpleProfileSerializer(read_only=True)
@@ -74,7 +79,13 @@ class BlogPostSerializer(serializers.ModelSerializer):
         fields = ['title', 'content', 'author', 'blog_comments', 'comment_count']
         model = BlogPost
 
-
+    def validate(self, data):
+        if not data.get('title', '').strip():
+            raise serializers.ValidationError('Title cannot be empty.')
+        if not data.get('content', '').strip():
+            raise serializers.ValidationError('Content cannot be empty.')
+        
+        return data
     def get_comment_count(self, obj):
         return obj.blog_comments.count()
 
