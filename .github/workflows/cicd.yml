@@ -86,5 +86,5 @@ jobs:
               docker compose down
               git pull
               docker compose up --build --detach
-              docker compose run django python manage.py collectstatic
+              docker compose run django python manage.py collectstatic --no-input
 
