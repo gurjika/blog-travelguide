@@ -84,6 +84,8 @@ jobs:
               echo "MYSQL_DB_PASSWORD=${{ secrets.MYSQL_DB_PASSWORD }}" >> .env
 
               docker compose down
+              git stash
+              git stash drop
               git pull
               docker compose up --build --detach
               docker compose run django python manage.py collectstatic --no-input
