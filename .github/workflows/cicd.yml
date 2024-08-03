@@ -60,4 +60,4 @@ jobs:
 
     env:
       DJANGO_SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
-      MYSQL_DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+      MYSQL_DB_PASSWORD: ${{ secrets.MYSQL_DB_PASSWORD }}
