@@ -15,6 +15,12 @@ services:
     build: .
     command: ./wait-for-it.sh mysql:3306 -- ./entrypoint.sh
 
+
+    environment:
+      - HOST=mysql
+      - MYSQL_DB_PASSWORD=${MYSQL_DB_PASSWORD}
+      - DJANGO_SECRET_KEY=${DJANGO_SECRET_KEY}
+      
     # ports:
     #   - "8000:8000"
 
