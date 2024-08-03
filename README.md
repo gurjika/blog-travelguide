@@ -28,7 +28,7 @@ To explore and test the API endpoints, visit the Swagger documentation at [http:
 
 1. Clone the repository:
     ```sh
-    git https://github.com/gurjika/blog-travelguide/
+    git clone https://github.com/gurjika/blog-travelguide/
     ```
 
 2. Change into the project directory:
