@@ -36,7 +36,6 @@ To explore and test the API endpoints, visit the Swagger documentation at [http:
     cd blog-travelguide
     ```
 
-
 3. Create a `.env` file and specify the required environment variables:
     ```env
     MYSQL_DB_PASSWORD=your_db_password

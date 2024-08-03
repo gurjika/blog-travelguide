@@ -5,9 +5,10 @@ from .permissions import IsCreatorOfObjOrReadOnly, IsCurrentUserOrReadOnly
 from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAuthenticated
 from blog_api.serializers import BlogPostSerializer, CommentSerializer, ProfileSerializer
 from .models import BlogPost, Profile, Comment
-
+from .pagination import DefaultPagination
 
 class BlogViewSet(ModelViewSet):
+    pagination_class = DefaultPagination
     permission_classes = [IsCreatorOfObjOrReadOnly, IsAuthenticatedOrReadOnly]
     queryset = BlogPost.objects.prefetch_related('blog_comments__author__user', 'blog_comments').select_related('author__user').all()
     serializer_class = BlogPostSerializer
@@ -16,6 +17,7 @@ class BlogViewSet(ModelViewSet):
         return {'user': self.request.user, 'request': self.request}
     
 class CommentViewSet(ModelViewSet):
+    pagination_class = DefaultPagination
     permission_classes = [IsAuthenticatedOrReadOnly, IsCreatorOfObjOrReadOnly]
     serializer_class = CommentSerializer
 
