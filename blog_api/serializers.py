@@ -1,6 +1,5 @@
 from rest_framework import serializers
 from blog_api.models import BlogPost, Comment, Profile
-from django.conf import settings
 from django.contrib.auth import get_user_model
 
 User = get_user_model()
@@ -16,7 +15,7 @@ class SimpleUserSerializer(serializers.ModelSerializer):
 class SimpleBlogSerializer(serializers.ModelSerializer):
     comment_count = serializers.SerializerMethodField()
     class Meta:
-        fields = ['title', 'comment_count']
+        fields = ['id', 'title', 'comment_count']
         model = BlogPost
 
 
@@ -70,7 +69,7 @@ class SimpleProfileSerializer(serializers.ModelSerializer):
 class CommentSerializer(serializers.ModelSerializer):
     author = SimpleProfileSerializer(read_only=True)
     class Meta:
-        fields = ['content', 'author']
+        fields = ['id', 'content', 'author']
         model = Comment
 
 
@@ -89,7 +88,7 @@ class BlogPostSerializer(serializers.ModelSerializer):
     blog_comments = CommentSerializer(many=True, read_only=True)
     comment_count = serializers.SerializerMethodField()
     class Meta:
-        fields = ['title', 'content', 'author', 'blog_comments', 'comment_count']
+        fields = ['id', 'title', 'content', 'author', 'blog_comments', 'comment_count']
         model = BlogPost
 
     def validate(self, data):
