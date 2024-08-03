@@ -70,6 +70,7 @@ jobs:
     needs: build
     if: github.ref == 'refs/heads/master' && github.event_name == 'push'
     steps: 
+    
       - name: deploy to digitalocean
         uses: appleboy/ssh-action@v1.0.3
         with:
