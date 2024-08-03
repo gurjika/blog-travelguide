@@ -1,14 +1,14 @@
 from django.shortcuts import render
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.generics import RetrieveUpdateAPIView, get_object_or_404
-from .permissions import IsCreatorOfBlogOrReadOnly, IsCurrentUserOrReadOnly
+from .permissions import IsCreatorOfObjOrReadOnly, IsCurrentUserOrReadOnly
 from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAuthenticated
 from blog_api.serializers import BlogPostSerializer, CommentSerializer, ProfileSerializer
 from .models import BlogPost, Profile, Comment
 
 
 class BlogViewSet(ModelViewSet):
-    permission_classes = [IsCreatorOfBlogOrReadOnly, IsAuthenticatedOrReadOnly]
+    permission_classes = [IsCreatorOfObjOrReadOnly, IsAuthenticatedOrReadOnly]
     queryset = BlogPost.objects.prefetch_related('blog_comments__author__user', 'blog_comments').select_related('author__user').all()
     serializer_class = BlogPostSerializer
 
@@ -16,7 +16,7 @@ class BlogViewSet(ModelViewSet):
         return {'user': self.request.user, 'request': self.request}
     
 class CommentViewSet(ModelViewSet):
-    permission_classes = [IsAuthenticatedOrReadOnly]
+    permission_classes = [IsAuthenticatedOrReadOnly, IsCreatorOfObjOrReadOnly]
     serializer_class = CommentSerializer
 
     def get_queryset(self):
