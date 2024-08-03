@@ -57,7 +57,7 @@ class ProfileViewTests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
     def test_update_profile(self):
-
+        
         self.client.login(username='testuser', password='testpassword')
         self.client.force_authenticate(user=self.user)
 
